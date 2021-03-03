@@ -1,0 +1,62 @@
+'set the units
+With Units
+    .Geometry "mm"
+    .Frequency "GHz"
+    .Voltage "V"
+    .Resistance "Ohm"
+    .Inductance "NanoH"
+    .TemperatureUnit  "Kelvin"
+    .Time "ns"
+    .Current "A"
+    .Conductance "Siemens"
+    .Capacitance "PikoF"
+End With
+'----------------------------------------------------------------------------
+Plot.DrawBox True
+With Background
+     .Type "Normal"
+     .Epsilon "1.0"
+     .Mue "1.0"
+     .XminSpace "0.0"
+     .XmaxSpace "0.0"
+     .YminSpace "0.0"
+     .YmaxSpace "0.0"
+     .ZminSpace "0.0"
+     .ZmaxSpace "0.0"
+End With
+With Boundary
+     .Xmin "expanded open"
+     .Xmax "expanded open"
+     .Ymin "expanded open"
+     .Ymax "expanded open"
+     .Zmin "expanded open"
+     .Zmax "expanded open"
+     .Xsymmetry "none"
+     .Ysymmetry "none"
+     .Zsymmetry "none"
+End With
+' switch on FD-TET setting for accurate farfields
+FDSolver.ExtrudeOpenBC "True"
+Mesh.FPBAAvoidNonRegUnite "True"
+Mesh.ConsiderSpaceForLowerMeshLimit "False"
+Mesh.MinimumStepNumber "5"
+With MeshSettings
+     .SetMeshType "Hex"
+     .Set "RatioLimitGeometry", "20"
+End With
+With MeshSettings
+     .SetMeshType "HexTLM"
+     .Set "RatioLimitGeometry", "20"
+End With
+PostProcess1D.ActivateOperation "vswr", "true"
+PostProcess1D.ActivateOperation "yz-matrices", "true"
+'----------------------------------------------------------------------------
+With MeshSettings
+     .SetMeshType "Hex"
+     .Set "Version", 1%
+End With
+With Mesh
+     .MeshType "PBA"
+End With
+'set the solver type
+ChangeSolverType("HF Time Domain")

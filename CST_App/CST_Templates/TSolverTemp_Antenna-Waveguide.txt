@@ -1,0 +1,33 @@
+Mesh.SetCreator "High Frequency" 
+
+With Solver 
+     .Method "Hexahedral"
+     .CalculationType "TD-S"
+     .StimulationPort "1"
+     .StimulationMode "1"
+     .SteadyStateLimit "-40"
+     .MeshAdaption "False"
+     .CalculateModesOnly "False"
+     .SParaSymmetry "False"
+     .StoreTDResultsInCache  "False"
+     .FullDeembedding "False"
+     .SuperimposePLWExcitation "False"
+     .UseSensitivityAnalysis "False"
+End With
+
+With Solver 
+     .UseParallelization "True"
+     .MaximumNumberOfThreads "96"
+     .MaximumNumberOfCPUDevices "8"
+     .RemoteCalculation "False"
+     .UseDistributedComputing "False"
+     .MaxNumberOfDistributedComputingPorts "2"
+     .DistributeMatrixCalculation "True"
+     .MPIParallelization "False"
+     .HardwareAcceleration "True"
+     .MaximumNumberOfGPUs "1"
+End With
+UseDistributedComputingForParameters "False"
+MaxNumberOfDistributedComputingParameters "2"
+UseDistributedComputingMemorySetting "False"
+
